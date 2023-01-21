@@ -49,6 +49,16 @@ abstract class Character{
 
 class Player extends Character{
 
+    private int handnumber;
+
+    int gethandnumber(){
+        return this.handnumber;
+    }
+
+    void sethandnumber(int handnumber){
+        this.handnumber = handnumber;
+    }
+
     Player(String name, int win, int lose){
         super(name, win, lose);
     }
@@ -57,7 +67,7 @@ class Player extends Character{
     void act(ArrayList<Character> targets) {
         var command_selector = new CommandSelector();
         
-       //選択肢を用意する
+       //選択肢選択肢作成
         for(var action: getHands()) {
             command_selector.addCommand(action.name());
         }
@@ -65,6 +75,8 @@ class Player extends Character{
         var command_number = command_selector.waitForUsersCommand("最初はグー、ジャンケン...");
         System.out.println("ポンッ！");
         getHands().get(command_number);
+        handnumber = getHands().get(command_number).eigenvalue();
+        System.out.println(getHands().get(command_number).name());
     }
 }
 
@@ -106,6 +118,15 @@ class Player extends Character{
     }
 }
 class Enemy extends Character {
+    private int handnumber;
+
+    int gethandnumber(){
+        return this.handnumber;
+    }
+
+    void sethandnumber(int handnumber){
+        this.handnumber = handnumber;
+    }
     Enemy(String name, int win, int lose) {
         super(name, win, lose);
     }
@@ -115,6 +136,8 @@ class Enemy extends Character {
         Random random = new Random();
         int command = random.nextInt(3);
         getHands().get(command);
+        handnumber = getHands().get(command).eigenvalue();
+        System.out.println(getHands().get(command).name());
     }
  }
 
@@ -180,21 +203,43 @@ class Enemy extends Character {
 
  class Gameboard{
     ArrayList<Character> order = new ArrayList<>();
+    private int Rohan_hand;
+    private int Honda_hand;
+
+    int getRohan_hand(){
+        return this.Rohan_hand;
+    }
+
+    int getHonda_hand(){
+        return this.Honda_hand;
+    }
+
+    void setRohan_hand(int Rohan_hand){
+        this.Rohan_hand = Rohan_hand;
+    }
+
+    void setHonda_hand(int Honda_hand){
+        this.Honda_hand =Honda_hand;
+    }
 
     Gameboard() {
+
         var Rohan = new Player("あなた", 0, 0);
         Rohan.addAction(new Rock("グー", 1));
         Rohan.addAction(new paper("チョキ", 2));
         Rohan.addAction(new paper("パー", 3));
+        Rohan_hand = Rohan.gethandnumber();
 
         var Honda = new Enemy("本田圭佑", 0, 0);
         Honda.addAction(new Rock("グー", 1));
         Honda.addAction(new paper("チョキ", 2));
         Honda.addAction(new paper("パー", 3));
+        Honda_hand = Honda.gethandnumber();
 
         //入力順
         order.add(Rohan);
         order.add(Honda);
+        System.out.println(Rohan.getName());
     }
 
     void openStatus(){
@@ -208,7 +253,7 @@ class Enemy extends Character {
             check.act(order);
         }
     }
-
+    
     public static void main(String[] args){
         var board = new Gameboard();
         for(var i = 0; i<1; i++){
