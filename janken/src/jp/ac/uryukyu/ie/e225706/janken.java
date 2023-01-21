@@ -177,3 +177,22 @@ class Enemy extends Character {
         return this.eigenvalue;
     }
  }
+
+ class Gameboard{
+    ArrayList<Character> order = new ArrayList<>();
+
+    Gameboard() {
+        var Rohan = new Player("あなた", 0, 0);
+        Rohan.addAction(new Rock("グー", 1));
+        Rohan.addAction(new paper("チョキ", 2));
+        Rohan.addAction(new paper("パー", 3));
+
+        var Honda = new Enemy("本田圭佑", 0, 0);
+        Honda.addAction(new Rock("グー", 1));
+        Honda.addAction(new paper("チョキ", 2));
+        Honda.addAction(new paper("パー", 3));
+
+        order.add(Rohan);
+        order.add(Honda);
+    }
+ }
