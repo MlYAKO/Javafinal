@@ -70,6 +70,7 @@ class Player extends Character{
 
  interface Hand {
     String name();
+    int eigenvalue();
  }
 
  class CommandSelector {
@@ -118,5 +119,61 @@ class Enemy extends Character {
  }
 
  class Rock implements Hand{
-    
+    private String name;
+    private int eigenvalue;
+
+    Rock(String name, int eigenvalue){
+        this.name = name;
+        this.eigenvalue = eigenvalue;
+    }
+
+    @Override
+    public String name(){
+        return name;
+    }
+
+    @Override
+    public int eigenvalue(){
+        return this.eigenvalue;
+    }
+ }
+
+ class scissors implements Hand{
+    private String name;
+    private int eigenvalue;
+
+    scissors(String name, int eigenvalue){
+        this.name = name;
+        this.eigenvalue = eigenvalue;
+    }
+
+    @Override
+    public String name(){
+        return name;
+    }
+
+    @Override
+    public int eigenvalue(){
+        return this.eigenvalue;
+    }
+ }
+
+ class paper implements Hand{
+    private String name;
+    private int eigenvalue;
+
+    paper(String name, int eigenvalue){
+        this.name = name;
+        this.eigenvalue = eigenvalue;
+    }
+
+    @Override
+    public String name(){
+        return name;
+    }
+
+    @Override
+    public int eigenvalue(){
+        return this.eigenvalue;
+    }
  }
