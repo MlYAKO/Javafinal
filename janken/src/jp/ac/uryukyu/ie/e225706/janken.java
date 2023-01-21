@@ -120,7 +120,7 @@ class Enemy extends Character {
 
  class Rock implements Hand{
     private String name;
-    private int eigenvalue;
+    private int eigenvalue;//この手の数値
 
     Rock(String name, int eigenvalue){
         this.name = name;
@@ -192,7 +192,28 @@ class Enemy extends Character {
         Honda.addAction(new paper("チョキ", 2));
         Honda.addAction(new paper("パー", 3));
 
+        //入力順
         order.add(Rohan);
         order.add(Honda);
+    }
+
+    void openStatus(){
+        for(var open : order){
+            open.openStatus();
+        }
+    }
+
+    void janken(){
+        for(var check : order){
+            check.act(order);
+        }
+    }
+
+    public static void main(String[] args){
+        var board = new Gameboard();
+        for(var i = 0; i<1; i++){
+            board.openStatus();
+            board.janken();
+        }
     }
  }
